@@ -65,12 +65,14 @@ try{
          process.env.JWT_SECRET,
         {expiresIn: '15min'}
     );
+    //send the token back to the client.
     res.json({token,user});
+    } catch (error) {
+        res.status(500).json({
+            message: 'Login Failed',
+            error:error.message
+        });
     }
-}
-
-
-
 })
 module.exports = router;
 // Check if a user with the given email already exists. If so, return a 400 status with an appropriate message.
