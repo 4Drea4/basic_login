@@ -43,6 +43,30 @@ try{
     if(!email || !password){
         return res.status(400).json({message:'Missing your email or password'})
     }
+    const user = await User.findOne({email});
+    if(!user) {
+        return res.status(400).json({message:genericErrorMessage});
+    }
+
+    //If a user is found, use the isCorrectPassword instance method (or bcrypt.compare) to compare the incoming password with the user’s stored hashed password.
+
+    const correctPass = await user.isCorrectPassword(password);
+    if (!correctPass){
+        return res.status(400).json({message:genericErrorMessage});
+    }
+
+    const payload = {
+        _id:user._id,
+        username: user.username,
+        email: user.email
+    };
+    const token = jwt.sign(
+        {data:payload},
+         process.env.JWT_SECRET,
+        {expiresIn: '15min'}
+    );
+    res.json({token,user});
+    }
 }
 
 
