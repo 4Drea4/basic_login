@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         minlength:8
     }
 });
-
+// ooowee okay I am using Hasnas activity as an example
 userSchema.pre('save', async function () {
     if(this.isNew || this.isModified("password")) {
         const saltRounds = 10;
@@ -30,5 +30,9 @@ userSchema.pre('save', async function () {
     }
 });
 
-// ooowee okay I am using Hasnas activity as an example
-userSchema.pre
+
+userSchema.methods.isCorrectPassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+};
+const User = mongoose.model('User', userSchema);
+module.exports = User;
