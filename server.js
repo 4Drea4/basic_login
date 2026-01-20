@@ -16,11 +16,11 @@ connectDB();
 app.get('/', (req, res) =>{
     res.send('<h1>Innovate Inc</h1>');
 
-})
+});
 
 //routes
 app.use('/api/users', userRoutes);
 
 app.listen(PORT, ()=>{
-    console.log(`Server is running on port: &{PORT}`);
+    console.log(`Server is running on port: ${PORT}`);
 });

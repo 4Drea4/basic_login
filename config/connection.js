@@ -8,3 +8,5 @@ async function connectDB(){
         console.log('Mongo connection error', error.message)
     }
 }
+
+module.exports = connectDB;
