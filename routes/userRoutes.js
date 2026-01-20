@@ -30,5 +30,23 @@ router.post('/register' , async (req,res) => {
     });
 }
 });
+//Create a POST route (e.g., /api/users/login).
+
+router.post('/login', async (req,res)=>{
+try{
+    //this route, take the email and password from the req.body.
+    const {email,password} = req.body;  
+    //Find a user in the database with the matching email. If no user is found, return a 400 status with a generic error message (e.g., “Incorrect email or password.”).
+
+    const genericErrorMessage = 'This email or password is incorrect';
+
+    if(!email || !password){
+        return res.status(400).json({message:'Missing your email or password'})
+    }
+}
+
+
+
+})
 module.exports = router;
 // Check if a user with the given email already exists. If so, return a 400 status with an appropriate message.
